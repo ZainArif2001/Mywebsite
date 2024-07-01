@@ -19,8 +19,14 @@ Route::get('/', function () {
 });
 
 // Login And Registeration Route ///
-Route::get('register',[LoginController::class,'Register'])->name('register');
-Route::post('registers',[LoginController::class,'Registers'])->name('registers');
-Route::get('login',[LoginController::class,'Login'])->name('login');
-Route::post('logins',[LoginController::class,'Logins'])->name('logins');
-Route::get('home',[LoginController::class,'wellcome'])->name('home');
+Route::group(['middleware'=>'guest'],function(){
+    Route::get('register',[LoginController::class,'Register'])->name('register');
+    Route::post('registers',[LoginController::class,'Registers'])->name('registers');
+    Route::get('login',[LoginController::class,'Login'])->name('login');
+    Route::post('logins',[LoginController::class,'Logins'])->name('logins');
+});
+
+Route::group(['middleware'=>'auth'],function(){
+    Route::get('home',[LoginController::class,'wellcome'])->name('home');
+    Route::get('logout',[LoginController::class,'Logout'])->name('logout');
+});

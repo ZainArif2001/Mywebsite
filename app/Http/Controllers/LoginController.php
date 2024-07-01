@@ -57,4 +57,13 @@ class LoginController extends Controller
         return view('welcome');
        }
 
+       /// Logout Your Account///
+    public function Logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('login');
+    }
+
 }
