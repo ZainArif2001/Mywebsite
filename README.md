@@ -64,3 +64,24 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+$user = Auth::User();
+        if($user){
+        session()->put('id',$user->id);
+        session()->put('type',$user->type);
+        if($user->type=='user'){
+            return redirect()->route('home');
+        }
+
+
+$validation = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|min:6'
+        ]);
+
+        if (Auth::attempt($request->only('email', 'password'))) {
+            return redirect()->route('home');
+        } else {
+            return redirect()->route('login')->withErrors(['email' => 'Invalid credentials.']);
+        }

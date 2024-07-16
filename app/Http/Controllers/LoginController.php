@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+
 class LoginController extends Controller
 {
 
-    public function Register(){
+    public function Register()
+    {
         return view('login_layout.register');
     }
 
@@ -34,30 +36,52 @@ class LoginController extends Controller
         }
     }
 
-    public function Login(){
+    public function Login()
+    {
         return view('login_layout.login');
     }
 
-       /// Login now The page ///
-       public function Logins(Request $request)
-       {
-           $validation = $request->validate([
-               'email' => 'required|email',
-               'password' => 'required|min:6'
-           ]);
+    /// Login now The page ///
+    public function Logins(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|min:6'
+        ]);
 
-           if (Auth::attempt($request->only('email', 'password'))) {
-               return redirect()->route('home');
-           } else {
-               return redirect()->route('login')->withErrors(['email' => 'Invalid credentials.']);
-           }
-       }
+        if (Auth::attempt($request->only('email', 'password'))) {
+            session()->put('id', Auth::id());
+            session()->put('type', Auth::user()->type);
 
-       public function wellcome(){
+            if (Auth::user()->type == 'user') {
+                return redirect()->route('home');
+                
+            } elseif (Auth::user()->type == 'admin') {
+                return redirect()->route('admin');
+            }
+        } else {
+            return redirect()->route('login')->withErrors(['email' => 'Invalid credentials.']);
+        }
+        // $user = User::where('email', $request->input('email'))->where('password', $request->input('password'));
+        // if ($user) {
+        //     session()->put('id', $user->id);
+        //     session()->put('type', $user->type);
+        //     if ($user->type == 'user') {
+        //         return redirect()->route('home');
+        //     } elseif ($user->type == 'admin') {
+        //         return redirect()->route('admin');
+        //     }else{
+        //         echo"Error";
+        //     }
+        // }
+    }
+
+    public function wellcome()
+    {
         return view('welcome');
-       }
+    }
 
-       /// Logout Your Account///
+    /// Logout Your Account///
     public function Logout(Request $request)
     {
         Auth::logout();
@@ -65,5 +89,4 @@ class LoginController extends Controller
         $request->session()->regenerateToken();
         return redirect()->route('login');
     }
-
 }
