@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Homecontroller;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,9 @@ Route::group(['middleware'=>'auth'],function(){
     Route::get('home',[LoginController::class,'wellcome'])->name('home');
     Route::get('Product',[ProductController::class,'Product'])->name('Product');
     Route::get('productshow',[ProductController::class,'Productshow'])->name('productshow');
+    Route::get('productdelete/{id}',[ProductController::class,'Delete'])->name('productdelete');
+    Route::get('productedite/{id}',[ProductController::class,'Productedite'])->name('productedite');
+    Route::post('productpost',[ProductController::class,'Productpost'])->name('productpost');
     Route::get('logout',[LoginController::class,'Logout'])->name('logout');
 });
 
@@ -40,5 +44,6 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     // other admin routes...
 });
 
-
-Route::post('productpost',[ProductController::class,'Productpost'])->name('productpost');
+Route::get('home',[Homecontroller::class,'Home'])->name('home');
+Route::get('contact',[Homecontroller::class,'Contact'])->name('contact');
+Route::get('edite',[ProductController::class,'Edite'])->name('edite');

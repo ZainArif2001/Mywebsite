@@ -1,12 +1,14 @@
 @extends('layoutadmin.Admin')
 
 @section('content')
+@section('title') {{'Edite Product'}} @endsection
 
-@section('title') {{'Add product'}} @endsection
+
 <h1>product</h1>
 
+{{-- <form action="{{ route('update',['id'=>$editess->id]) }}" method="post"> --}}
 
-<form action="{{route('productpost')}}" method="POST" enctype="multipart/form-data">
+<form action="{{route('productedite',['id'=>$productedite->id])}}" method="POST" enctype="multipart/form-data">
     @csrf
     <fieldset>
       <div>
@@ -21,7 +23,7 @@
       <div>
         <label for="exampleSelect1" class="form-label mt-4">Select Brand</label>
         <select class="form-select" id="exampleSelect1" name="product_brand">
-            <option>Iphone</option>
+            <option>Iphone</option>y
             <option>Samsung</option>
             <option>Techno</option>
             <option>Apple</option>

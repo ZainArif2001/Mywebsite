@@ -41,4 +41,25 @@ class ProductController extends Controller
         $productshows = product::paginate(10);
         return view('productshow',compact('productshows'));
     }
+
+    public function Productedite($id){
+        $productedite = product::find($id);
+        return view('productedites',compact('productedite'));
+    }
+
+
+    public function Edite(){
+        return view('productedites');
+    }
+
+    public function Delete($id){
+        $productdelete = Product::find($id);
+
+        if ($productdelete) {
+            $productdelete->delete();
+            return redirect()->route('productshow')->with('success', 'Product deleted successfully');
+        } else {
+            return redirect()->route('productshow')->with('error', 'Error deleting product');
+        }
+    }
 }
