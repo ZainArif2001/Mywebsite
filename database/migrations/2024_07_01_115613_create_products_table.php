@@ -19,7 +19,7 @@ return new class extends Migration
             $table->decimal('product_price',total:6,places:2);
             $table->string('Product_brand',length:255);
             $table->text('product_description');
-            $table->string('product_image');
+            $table->string('product_image')->nullable();
             $table->timestamps();
         });
     }

@@ -36,6 +36,7 @@ Route::group(['middleware'=>'auth'],function(){
     Route::get('productdelete/{id}',[ProductController::class,'Delete'])->name('productdelete');
     Route::get('productedite/{id}',[ProductController::class,'Productedite'])->name('productedite');
     Route::post('productpost',[ProductController::class,'Productpost'])->name('productpost');
+    Route::post('productupdate',[ProductController::class,'Productupdate'])->name('productupdate');
     Route::get('logout',[LoginController::class,'Logout'])->name('logout');
 });
 
@@ -47,3 +48,4 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 Route::get('home',[Homecontroller::class,'Home'])->name('home');
 Route::get('contact',[Homecontroller::class,'Contact'])->name('contact');
 Route::get('edite',[ProductController::class,'Edite'])->name('edite');
+Route::post('proupdate/{id}',[ProductController::class,'Update'])->name('proupdate');

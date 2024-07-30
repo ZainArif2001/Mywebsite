@@ -12,7 +12,11 @@
       <div>
         <label for="exampleInputEmail1" class="form-label mt-4">Product Name</label>
         <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Product Name" name="product_name">
-        <small id="emailHelp" class="form-text text-muted"></small>
+        @error('product_name')
+        <small id="emailHelp" class="btn btn-danger">{{$message}}</small>
+
+
+        @enderror
       </div>
       <div>
         <label for="exampleInputPassword1" class="form-label mt-4">Product Price</label>
@@ -20,7 +24,7 @@
       </div>
       <div>
         <label for="exampleSelect1" class="form-label mt-4">Select Brand</label>
-        <select class="form-select" id="exampleSelect1" name="product_brand">
+        <select class="form-select" id="exampleSelect1" name="Product_brand">
             <option>Iphone</option>
             <option>Samsung</option>
             <option>Techno</option>
