@@ -12,7 +12,7 @@
   body {
     width: 100%;
     /* height: 100vh; */
-    background-image: url('img/bg.png');
+    background-image: url('image/login.jpeg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -28,7 +28,7 @@
     padding-bottom: 20px;
   }
   .glass-effect {
-    margin-top: 10px;
+    margin-top: 15px;
   background-color: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(10px);
   border-radius: 10px;

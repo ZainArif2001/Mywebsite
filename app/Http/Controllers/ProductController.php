@@ -79,7 +79,7 @@ class ProductController extends Controller
         if (!$productupdate) {
             return back()->with('error', 'Product not found.');
         }
-        
+
         if ($request->hasFile('product_image')) {
             $product_image_name = time() . '.' . $request->product_image->extension();
             $request->product_image->move(public_path('images'), $product_image_name);
